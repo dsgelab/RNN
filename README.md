@@ -1,6 +1,6 @@
-RNN (pytorch) model and preprocessing
+# RNN (pytorch) model and preprocessing of Finregistry data
 
-Preprocessing
+## Preprocessing
 
 demo features
 
