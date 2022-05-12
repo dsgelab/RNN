@@ -11,8 +11,3 @@
 ### 6_final_data
 
 
-```python
-s = "Python syntax highlighting"
-print(s)
-import pandas as pd
-```
