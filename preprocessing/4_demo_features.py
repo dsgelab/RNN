@@ -699,6 +699,9 @@ features[['AGE', 'longitude_last', 'latitude_last','latitude_first', 'longitude_
           'Assistance_months','Assistance_years', 'SocHilm_Duration_days']] = scaler.fit_transform(features[['AGE', 'longitude_last', 'latitude_last','latitude_first', 'longitude_first', 'residence_duration_first',
           'B_Mothers_age', 'B_Pregnancy_duration', 'B_Birth_weight','B_Birth length', 'Total_assistance', 'Assistance_months','Assistance_years', 'SocHilm_Duration_days']])
 
+features[['number_of_children', 'drug_purchases', 'kanta_prescriptions','B_prrevious_pregnancies', 'B_Previous_miscarriages', 'B_Previous_induced_abortions','B_Previous_ectopic_pregnancies', 'B_Previous_births', 'B_stilborn','B_check_ups', 'B_check_ups_outpat',
+          'B_Number_of_fetuses','B_apgar_1m', 'B_apgar_5m']] = scaler.fit_transform(features[['number_of_children', 'drug_purchases', 'kanta_prescriptions','B_prrevious_pregnancies', 'B_Previous_miscarriages', 'B_Previous_induced_abortions','B_Previous_ectopic_pregnancies',
+          'B_Previous_births', 'B_stilborn','B_check_ups', 'B_check_ups_outpat','B_Number_of_fetuses','B_apgar_1m', 'B_apgar_5m']])
 
 # In[88]:
 
