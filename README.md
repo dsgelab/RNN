@@ -17,7 +17,7 @@ Codes for education level and education field were used. Education level is orde
 Finland has 309 municipalities (2021) and in this study the geographical location of the individuals was based on the municipality. The geographical information was available from 1964 onwards and to account for changes in municipality definitions (area changes, new municipalities appearing and old disappearing) throughout this follow-up period, the location information was harmonised based on 309 municipalities as defined in 2021. In the models this information was used longitudinally as individuals for whom the data was available changed the municipality in which they lived on average 2.1 times. As geographic information was available only for index individuals, for individuals born on and after 2010 their mothers’ geographic information was used.
 
 Geographic information as available only for index individuals, thus not available for individuals born after January 1st, 2010. For those individuals we have replaced missing geographic information with the geographic information of their mothers.  
-Mothers' ID for children born after 2010 was taken from DVV relatives register. Then mothers longitudinal geographic information from the year a child was born was used to replace missing child’s geographic information.
+Mothers' IDs for children born after 2010 was taken from DVV relatives register. Then mothers longitudinal geographic information starting from the year the child was born was used to replace missing child’s geographic information.
 
 
 ### 1_combine
