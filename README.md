@@ -30,8 +30,8 @@ done
 ```
 
 Locations for already split files: 
-detiled longitudinal: '/data/processed_data/endpointer/supporting_files/main/'
-endpoint longitudinal: '/data/project_avabalas/RNN/preprocessing/'
+detiled longitudinal: '/data/processed_data/endpointer/supporting_files/main/',
+endpoint longitudinal: '/data/project_avabalas/RNN/preprocessing/',
 new registers: '/data/projects/project_avabalas/RNN/preprocessing_new/'
 
 in preprocessing folder also shell scripts for splitting detialed longirtidunal and endpoint longitudlail are included. in files split_detailed_longitudinal.sh and split_endpoint_longitudinal.sh
