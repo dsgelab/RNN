@@ -18,7 +18,7 @@ Finland has 309 municipalities (2021) and in this study the geographical locatio
 
 ### 1_combine
 
-This script combines data from three sources. Endpoint longitudinal file, detailed longitudinal file and new longitudinal features file (which is deived from new registers not included in detailed longitudinal file yet (see 0_additional_longitudinal_features)). Before running this script, all longitudinal files must be split to smaller files each containing data for 300k IDs. The script can be run in parallel using bash commands:
+This script combines data from three sources. Endpoint longitudinal file, detailed longitudinal file and new longitudinal features file (which is deived from new registers not included in detailed longitudinal file yet (see 0_additional_longitudinal_features)). Before running this script, all longitudinal files must be split to smaller files each containing data for 300k IDs. The script can be run in parallel using shell commands:
 
 ```console
 set -x
@@ -28,6 +28,15 @@ for num in $(seq -w 01 24); do
 	if (( $INDEX % 5 == 0 )); then sleep 110m; fi
 done
 ```
+
+Locations for already split files: 
+detiled longitudinal: '/data/processed_data/endpointer/supporting_files/main/'
+endpoint longitudinal: '/data/project_avabalas/RNN/preprocessing/'
+new registers: '/data/projects/project_avabalas/RNN/preprocessing_new/'
+
+in preprocessing folder also shell scripts for splitting detialed longirtidunal and endpoint longitudlail are included. in files split_detailed_longitudinal.sh and split_endpoint_longitudinal.sh
+
+
 
 ### 2_dict_codes
 ### 3_delete_rare_redundant_codes
