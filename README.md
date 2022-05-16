@@ -17,6 +17,18 @@ Codes for education level and education field were used. Education level is orde
 Finland has 309 municipalities (2021) and in this study the geographical location of the individuals was based on the municipality. The geographical information was available from 1964 onwards and to account for changes in municipality definitions (area changes, new municipalities appearing and old disappearing) throughout this follow-up period, the location information was harmonised based on 309 municipalities as defined in 2021. In the models this information was used longitudinally as individuals for whom the data was available changed the municipality in which they lived on average 2.1 times. As geographic information was available only for index individuals, for individuals born on and after 2010 their mothers’ geographic information was used.
 
 ### 1_combine
+
+This script combines data from three sources. Endpoint longitudinal file, detailed longitudinal file and new longitudinal features file (which is deived from new registers not included in detailed longitudinal file yet (see 0_additional_longitudinal_features)). Before running this script, all longitudinal files must be split to smaller files each containing data for 300k IDs. The script can be run in parallel using bash commands:
+
+```console
+set -x
+for num in $(seq -w 01 24); do
+	INDEX=$(echo $num | sed 's/^0*//')
+	python3 .../combine_datas.py --loop_index $INDEX &
+	if (( $INDEX % 5 == 0 )); then sleep 110m; fi
+done
+```
+
 ### 2_dict_codes
 ### 3_delete_rare_redundant_codes
 ### 4_demo_features
