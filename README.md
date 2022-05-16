@@ -22,7 +22,7 @@ Mothers' IDs for children born after 2010 was taken from DVV relatives register.
 
 ### 1_combine_datas
 
-This script combines data from three sources. Endpoint longitudinal file, detailed longitudinal file and new longitudinal features file (which is deived from new registers not included in detailed longitudinal file yet (see 0_additional_longitudinal_features)). Before running this script, all longitudinal files must be split to smaller files each containing data for 300k IDs. The script can be run in parallel using shell commands:
+This script combines data from three sources: Endpoint longitudinal file, Detailed longitudinal file and new longitudinal features file (which is derived from new registers not previously included in detailed longitudinal file yet (see 0_additional_longitudinal_features)). Before running this script, all longitudinal files must be split to smaller files each containing data for 300k IDs. The script can be run in parallel using shell commands:
 
 ```console
 set -x
@@ -38,7 +38,7 @@ detiled longitudinal: '/data/processed_data/endpointer/supporting_files/main/',
 endpoint longitudinal: '/data/project_avabalas/RNN/preprocessing/',
 new registers: '/data/projects/project_avabalas/RNN/preprocessing_new/'
 
-in preprocessing folder also shell scripts for splitting detialed longirtidunal and endpoint longitudlail are included. in files split_detailed_longitudinal.sh and split_endpoint_longitudinal.sh
+In pre-processing folder shell scripts for splitting detailed longitudinal and endpoint longitudinal are included in files split_detailed_longitudinal.sh and split_endpoint_longitudinal.sh
 
 
 
