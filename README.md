@@ -20,7 +20,7 @@ Geographic information as available only for index individuals, thus not availab
 Mothers' IDs for children born after 2010 was taken from DVV relatives register. Then mothers longitudinal geographic information starting from the year the child was born was used to replace missing child’s geographic information.
 
 
-### 1_combine
+### 1_combine_datas
 
 This script combines data from three sources. Endpoint longitudinal file, detailed longitudinal file and new longitudinal features file (which is deived from new registers not included in detailed longitudinal file yet (see 0_additional_longitudinal_features)). Before running this script, all longitudinal files must be split to smaller files each containing data for 300k IDs. The script can be run in parallel using shell commands:
 
