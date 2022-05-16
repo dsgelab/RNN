@@ -662,6 +662,7 @@ print(geo2['FINREGISTRYID'].nunique())
 geo2.to_csv('/data/projects/project_avabalas/RNN/preprocessing_new/geo_features.csv', index=False)
 ```
 
+# Combine datas
 
 ```python
 all_long = pd.concat([longitudinal,geo2],    # Combine vertically
