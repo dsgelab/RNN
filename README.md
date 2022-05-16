@@ -24,7 +24,7 @@ This script combines data from three sources. Endpoint longitudinal file, detail
 set -x
 for num in $(seq -w 01 24); do
 	INDEX=$(echo $num | sed 's/^0*//')
-	python3 combine_datas.py --loop_index $INDEX &
+	python3 1_combine_datas.py --loop_index $INDEX &
 	if (( $INDEX % 5 == 0 )); then sleep 110m; fi
 done
 ```
