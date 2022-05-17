@@ -617,8 +617,8 @@ features = features.merge(one_h, on='FINREGISTRYID', how='left')
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler()
 # transform continous features
-features[['AGE', 'longitude_last', 'latitude_last','latitude_first', 'longitude_first', 'residence_duration_first','B_Mothers_age', 'B_Pregnancy_duration', 'B_Birth_weight','B_Birth length', 'Total_assistance',
-          'Assistance_months','Assistance_years', 'SocHilm_Duration_days']] = scaler.fit_transform(features[['AGE', 'longitude_last', 'latitude_last','latitude_first', 'longitude_first', 'residence_duration_first',
+features[['AGE','B_Mothers_age', 'B_Pregnancy_duration', 'B_Birth_weight','B_Birth length', 'Total_assistance',
+          'Assistance_months','Assistance_years', 'SocHilm_Duration_days']] = scaler.fit_transform(features[['AGE',
           'B_Mothers_age', 'B_Pregnancy_duration', 'B_Birth_weight','B_Birth length', 'Total_assistance', 'Assistance_months','Assistance_years', 'SocHilm_Duration_days']])
 # transform ordinal features
 features[['number_of_children', 'drug_purchases', 'kanta_prescriptions','B_prrevious_pregnancies', 'B_Previous_miscarriages', 'B_Previous_induced_abortions','B_Previous_ectopic_pregnancies', 'B_Previous_births', 'B_stilborn','B_check_ups', 'B_check_ups_outpat',

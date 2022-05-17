@@ -2,7 +2,7 @@
 ###############################################################################
 #
 # A simple script for spliting endpoint longitudinal file (sorted by ID) to 
-# chunks containing 300000 IDs each for the FinnGen project.
+# chunks containing 300000 IDs each for the Finregistry project.
 # 
 # A file of 7166416 IDs is splt into 24 files
 # 

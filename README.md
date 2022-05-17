@@ -43,12 +43,48 @@ In pre-processing folder shell scripts for splitting detailed longitudinal and e
 
 
 ### 2_dict_codes
+
+Here a code dictionary is constructed from all the codes in combined longitudinal files. In addition a total number of code occurrences is counted as well as a number of IDs which have a code occurring at least once in their longitudinal history. 
+
 ### 3_delete_rare_redundant_codes
+
+Additionally omitted endpoints/ other codes: 
+
+Endpoint longitudinal from which endpoint codes were taken had endpoints marked as omitted in FinnGen endpoint definition file “OMIT” column already removed except those which had 'Modification_reason' marked as due to 'EXMORE/EXALLC priorities' and a 'DEATH' endpoint.
+
+```python
+omits = endp[((endp['OMIT']==2) | (endp['OMIT']==1)) & (endp['Modification_reason']!='EXMORE/EXALLC priorities') & (endp['NAME']!='DEATH')]['NAME'].unique()
+```
+Here in addition we have removed endpoints which were generated solely form Kela purchases register medication ATC codes, because ATC codes from Kela purchases register are included as separate longitudinal features
+
+```python
+meds = endp[(endp['KELA_ATC'].notna()) & (endp['HD_ICD_10'].isna())]['NAME'].unique()
+```
+We have also removed composite endpoints which are combinations of other endpoins without taking any additional information from registers: 
+
+```python
+composite = endp[(endp['COD_ICD_10'].isna()) & (endp['HD_ICD_10'].isna()) & (endp['HD_ICD_10'].isna()) & (endp['CANC_TOPO'].isna()) & (endp['KELA_ATC'].isna()) & (endp['KELA_REIMB'].isna()) & (endp['OPER_NOM'].isna()) & ~(endp['NAME'].str.contains('#_This_follow'))]['NAME'].unique()
+```
+In this part we have also removed all rare codes (for each data modality). Codes occurring in less than 70 individuals in a full dataset (prevalence of < 1/100000) were removed.
+
+These codes were deleted form data files and code dictionary. 
+
+
 ### 4_demo_features
 
-This script is for extracting fixed-over-the-time features, which cannot be included in the model longitudinally. The data inputs are from pre-processed “minimal phenotype” file and from Birth, Malformations, Social assistance, Social Hilmo and Intensive care register. Smoking status was also derived from AvoHilmo and Birth registers. The features were, continuous, ordinal, and categorical (binary + one-hot-encoded if there were more than 2 categories). Continuous and ordinal features were rescaled to be in the range 0 to 1. 
+This script is for extracting fixed-over-the-time features, which cannot be included in the model longitudinally. The data inputs are from pre-processed “minimal phenotype” file and from Birth, Malformations, Social assistance, Social Hilmo and Intensive care register. Smoking status was also derived from AvoHilmo and Birth registers. The features were, continuous, ordinal, and categorical (binary + one-hot-encoded if there were more than 2 categories). Continuous and ordinal features were rescaled to be in the range from 0 to 1. 
 
-### 5 label
+### 5_label
+
+A label was assigned a value of 1 if an individual died within a period of 2018-2019 (a case), if an induvial died earlier the assigned value was 2 (neither case nor control), and the rest were assigned a value of 0 (control).
+
+The Finregstry project has information about individuals’ deaths from two registers: SF death and DVV relatives. For our purposes, we considered individuals as deceased if either the year of death was recorded in the SF death register (the year was used because for a small proportion of entries only year but no exact date was available) or the date of death was recorded in DVV relatives register. Both registers do not fully overlap with larger disagreement in earlier years and considerably smaller in later years. For the period between 1st January 2018 and 31st December 2019 there was a good agreement between the two registers (99.83%).
+In a full sample the label distribution was: 
+* 0 - 5573999
+* 2 - 1483115
+* 1 - 109302
+
+
 ### 6_final_data
 
 
