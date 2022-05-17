@@ -74,7 +74,7 @@ These codes were deleted form data files and code dictionary.
 
 This script is for extracting fixed-over-the-time features, which cannot be included in the model longitudinally. The data inputs are from pre-processed “minimal phenotype” file and from Birth, Malformations, Social assistance, Social Hilmo and Intensive care register. Smoking status was also derived from AvoHilmo and Birth registers. The features were, continuous, ordinal, and categorical (binary + one-hot-encoded if there were more than 2 categories). Continuous and ordinal features were rescaled to be in the range from 0 to 1. 
 
-### 5 label
+### 5_label
 
 A label was assigned a value of 1 if an individual died within a period of 2018-2019 (a case), if an induvial died earlier the assigned value was 2 (neither case nor control), and the rest were assigned a value of 0 (control).
 
