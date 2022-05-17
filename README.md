@@ -49,6 +49,15 @@ In pre-processing folder shell scripts for splitting detailed longitudinal and e
 This script is for extracting fixed-over-the-time features, which cannot be included in the model longitudinally. The data inputs are from pre-processed “minimal phenotype” file and from Birth, Malformations, Social assistance, Social Hilmo and Intensive care register. Smoking status was also derived from AvoHilmo and Birth registers. The features were, continuous, ordinal, and categorical (binary + one-hot-encoded if there were more than 2 categories). Continuous and ordinal features were rescaled to be in the range 0 to 1. 
 
 ### 5 label
+
+A label was assigned a value of 1 if an individual died within a period of 2018-2019 (a case), if an induvial died earlier the assigned value was 2 (neither case nor control), and the rest were assigned a value of 0 (control). 
+The Finregstry project has information about individuals’ deaths from two registers: SF death and DVV relatives. For our purposes, we considered individuals as deceased if either the year of death was recorded in the SF death register (the year was used because for a small proportion of entries only year but no exact date was available) or the date of death was recorded in DVV relatives register. Both registers do not fully overlap with larger disagreement in earlier years and considerably smaller in later years. For the period between 1st January 2018 and 31st December 2019 there was a good agreement between the two registers (99.83%).
+In a full sample the label distribution was: 
+* 0    5573999
+* 2    1483115
+* 1     109302
+
+
 ### 6_final_data
 
 
