@@ -44,6 +44,29 @@ In pre-processing folder shell scripts for splitting detailed longitudinal and e
 
 ### 2_dict_codes
 ### 3_delete_rare_redundant_codes
+
+Additionally omitted endpoints/ other codes: 
+
+Endpoint longitudinal from which endpoint codes were taken had endpoints marked as omitted in FinnGen endpoint definition file “OMIT” column already removed except those which had 'Modification_reason' marked as due to 'EXMORE/EXALLC priorities' and a 'DEATH' endpoint.
+
+```python
+omits = endp[((endp['OMIT']==2) | (endp['OMIT']==1)) & (endp['Modification_reason']!='EXMORE/EXALLC priorities') & (endp['NAME']!='DEATH')]['NAME'].unique()
+```
+Here in addition we have removed endpoints which were generated solely form Kela purchases register medication ATC codes, because ATC codes from Kela purchases register are included as separate longitudinal features
+
+```python
+meds = endp[(endp['KELA_ATC'].notna()) & (endp['HD_ICD_10'].isna())]['NAME'].unique()
+```
+We have also removed composite endpoints which are combinations of other endpoins without taking any additional information from registers: 
+
+```python
+composite = endp[(endp['COD_ICD_10'].isna()) & (endp['HD_ICD_10'].isna()) & (endp['HD_ICD_10'].isna()) & (endp['CANC_TOPO'].isna()) & (endp['KELA_ATC'].isna()) & (endp['KELA_REIMB'].isna()) & (endp['OPER_NOM'].isna()) & ~(endp['NAME'].str.contains('#_This_follow'))]['NAME'].unique()
+```
+In this part we have also removed all rare codes (for each data modality). coded occurring in less than 70 individuals in a full dataset (prevalence of less than 1/100000) were removed.
+
+These codes were deleted form both data files and code dictionary. 
+
+
 ### 4_demo_features
 
 This script is for extracting fixed-over-the-time features, which cannot be included in the model longitudinally. The data inputs are from pre-processed “minimal phenotype” file and from Birth, Malformations, Social assistance, Social Hilmo and Intensive care register. Smoking status was also derived from AvoHilmo and Birth registers. The features were, continuous, ordinal, and categorical (binary + one-hot-encoded if there were more than 2 categories). Continuous and ordinal features were rescaled to be in the range from 0 to 1. 
