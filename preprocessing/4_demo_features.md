@@ -56,7 +56,7 @@ ordinal['kanta_prescriptions'] = ordinal['kanta_prescriptions'].fillna(ordinal['
 
 
 ```python
-binary = df[["FINREGISTRYID",'sex','in_social_assistance_registries','in_social_hilmo','index_person','ever_married','ever_divorced','emigrated',
+binary = df[["FINREGISTRYID",'sex','in_social_assistance_registries','in_social_hilmo','index_person',
          'birth_registry_mother','birth_registry_child','in_vaccination_registry','in_infect_dis_registry','in_malformations_registry','in_cancer_registry']].copy()
 ```
 
@@ -79,6 +79,30 @@ df['mother_tongue']=df['mother_tongue'].fillna('unk')
 one_hot = pd.get_dummies(df['mother_tongue'])
 one_hot = one_hot.rename(columns={'fi': 'lang_fi','other': 'lang_other','ru': 'lang_ru','sv': 'lang_sv','unk': 'lang_unk'})
 one_h = df[["FINREGISTRYID"]].join(one_hot)
+```
+
+
+```python
+df['ever_married']=df['ever_married'].fillna(2)
+one_hot = pd.get_dummies(df['ever_married'])
+one_hot = one_hot.rename(columns={0.0: 'ever_married_no',1.0: 'ever_married_yes',2.0: 'ever_married_nan'})
+one_h = one_h.join(one_hot)
+```
+
+
+```python
+df['ever_divorced']=df['ever_divorced'].fillna(2)
+one_hot = pd.get_dummies(df['ever_divorced'])
+one_hot = one_hot.rename(columns={0.0: 'ever_divorced_no',1.0: 'ever_divorced_yes',2.0: 'ever_divorced_nan'})
+one_h = one_h.join(one_hot)
+```
+
+
+```python
+#df['emigrated']=df['emigrated'].fillna(2)
+#one_hot = pd.get_dummies(df['emigrated'])
+#one_hot = one_hot.rename(columns={0.0: 'emigrated_no',1.0: 'emigrated_yes',2.0: 'emigrated_nan'})
+#one_h = one_h.join(one_hot)
 ```
 
 # BIRTH
@@ -311,13 +335,6 @@ ass_all = ass.append(ass_spouse, ignore_index=True)
 ```python
 ass_all['TNRO'].nunique()
 ```
-
-
-
-
-    1797788
-
-
 
 
 ```python
@@ -610,6 +627,12 @@ features = continous.copy()
 features = features.merge(ordinal, on='FINREGISTRYID', how='left')
 features = features.merge(binary, on='FINREGISTRYID', how='left')
 features = features.merge(one_h, on='FINREGISTRYID', how='left')
+```
+
+
+```python
+features = features.sort_values(["FINREGISTRYID"], ascending = (True))
+features.reset_index(drop=True, inplace=True)
 ```
 
 

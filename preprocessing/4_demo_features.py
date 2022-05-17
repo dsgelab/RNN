@@ -64,7 +64,7 @@ ordinal['kanta_prescriptions'] = ordinal['kanta_prescriptions'].fillna(ordinal['
 # In[ ]:
 
 
-binary = df[["FINREGISTRYID",'sex','in_social_assistance_registries','in_social_hilmo','index_person','ever_married','ever_divorced','emigrated',
+binary = df[["FINREGISTRYID",'sex','in_social_assistance_registries','in_social_hilmo','index_person',
          'birth_registry_mother','birth_registry_child','in_vaccination_registry','in_infect_dis_registry','in_malformations_registry','in_cancer_registry']].copy()
 
 
@@ -89,6 +89,33 @@ df['mother_tongue']=df['mother_tongue'].fillna('unk')
 one_hot = pd.get_dummies(df['mother_tongue'])
 one_hot = one_hot.rename(columns={'fi': 'lang_fi','other': 'lang_other','ru': 'lang_ru','sv': 'lang_sv','unk': 'lang_unk'})
 one_h = df[["FINREGISTRYID"]].join(one_hot)
+
+
+# In[ ]:
+
+
+df['ever_married']=df['ever_married'].fillna(2)
+one_hot = pd.get_dummies(df['ever_married'])
+one_hot = one_hot.rename(columns={0.0: 'ever_married_no',1.0: 'ever_married_yes',2.0: 'ever_married_nan'})
+one_h = one_h.join(one_hot)
+
+
+# In[ ]:
+
+
+df['ever_divorced']=df['ever_divorced'].fillna(2)
+one_hot = pd.get_dummies(df['ever_divorced'])
+one_hot = one_hot.rename(columns={0.0: 'ever_divorced_no',1.0: 'ever_divorced_yes',2.0: 'ever_divorced_nan'})
+one_h = one_h.join(one_hot)
+
+
+# In[ ]:
+
+
+#df['emigrated']=df['emigrated'].fillna(2)
+#one_hot = pd.get_dummies(df['emigrated'])
+#one_hot = one_hot.rename(columns={0.0: 'emigrated_no',1.0: 'emigrated_yes',2.0: 'emigrated_nan'})
+#one_h = one_h.join(one_hot)
 
 
 # # BIRTH
@@ -688,11 +715,18 @@ features = features.merge(one_h, on='FINREGISTRYID', how='left')
 # In[ ]:
 
 
+features = features.sort_values(["FINREGISTRYID"], ascending = (True))
+features.reset_index(drop=True, inplace=True)
+
+
+# In[ ]:
+
+
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler()
 # transform continous features
-features[['AGE', 'longitude_last', 'latitude_last','latitude_first', 'longitude_first', 'residence_duration_first','B_Mothers_age', 'B_Pregnancy_duration', 'B_Birth_weight','B_Birth length', 'Total_assistance',
-          'Assistance_months','Assistance_years', 'SocHilm_Duration_days']] = scaler.fit_transform(features[['AGE', 'longitude_last', 'latitude_last','latitude_first', 'longitude_first', 'residence_duration_first',
+features[['AGE','B_Mothers_age', 'B_Pregnancy_duration', 'B_Birth_weight','B_Birth length', 'Total_assistance',
+          'Assistance_months','Assistance_years', 'SocHilm_Duration_days']] = scaler.fit_transform(features[['AGE',
           'B_Mothers_age', 'B_Pregnancy_duration', 'B_Birth_weight','B_Birth length', 'Total_assistance', 'Assistance_months','Assistance_years', 'SocHilm_Duration_days']])
 # transform ordinal features
 features[['number_of_children', 'drug_purchases', 'kanta_prescriptions','B_prrevious_pregnancies', 'B_Previous_miscarriages', 'B_Previous_induced_abortions','B_Previous_ectopic_pregnancies', 'B_Previous_births', 'B_stilborn','B_check_ups', 'B_check_ups_outpat',
