@@ -50,12 +50,13 @@ This script is for extracting fixed-over-the-time features, which cannot be incl
 
 ### 5 label
 
-A label was assigned a value of 1 if an individual died within a period of 2018-2019 (a case), if an induvial died earlier the assigned value was 2 (neither case nor control), and the rest were assigned a value of 0 (control). 
+A label was assigned a value of 1 if an individual died within a period of 2018-2019 (a case), if an induvial died earlier the assigned value was 2 (neither case nor control), and the rest were assigned a value of 0 (control).
+
 The Finregstry project has information about individuals’ deaths from two registers: SF death and DVV relatives. For our purposes, we considered individuals as deceased if either the year of death was recorded in the SF death register (the year was used because for a small proportion of entries only year but no exact date was available) or the date of death was recorded in DVV relatives register. Both registers do not fully overlap with larger disagreement in earlier years and considerably smaller in later years. For the period between 1st January 2018 and 31st December 2019 there was a good agreement between the two registers (99.83%).
 In a full sample the label distribution was: 
-* 0    5573999
-* 2    1483115
-* 1     109302
+* 0 - 5573999
+* 2 - 1483115
+* 1 - 109302
 
 
 ### 6_final_data
