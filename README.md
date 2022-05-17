@@ -65,7 +65,7 @@ We have also removed composite endpoints which are combinations of other endpoin
 ```python
 composite = endp[(endp['COD_ICD_10'].isna()) & (endp['HD_ICD_10'].isna()) & (endp['HD_ICD_10'].isna()) & (endp['CANC_TOPO'].isna()) & (endp['KELA_ATC'].isna()) & (endp['KELA_REIMB'].isna()) & (endp['OPER_NOM'].isna()) & ~(endp['NAME'].str.contains('#_This_follow'))]['NAME'].unique()
 ```
-In this part we have also removed all rare codes (for each data modality). coded occurring in less than 70 individuals in a full dataset (prevalence of less than 1/100000) were removed.
+In this part we have also removed all rare codes (for each data modality). Codes occurring in less than 70 individuals in a full dataset (prevalence of < 1/100000) were removed.
 
 These codes were deleted form data files and code dictionary. 
 
