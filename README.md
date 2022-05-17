@@ -64,7 +64,7 @@ composite = endp[(endp['COD_ICD_10'].isna()) & (endp['HD_ICD_10'].isna()) & (end
 ```
 In this part we have also removed all rare codes (for each data modality). coded occurring in less than 70 individuals in a full dataset (prevalence of less than 1/100000) were removed.
 
-These codes were deleted form both data files and code dictionary. 
+These codes were deleted form data files and code dictionary. 
 
 
 ### 4_demo_features
