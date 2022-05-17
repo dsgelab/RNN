@@ -98,7 +98,7 @@ if __name__ == "__main__":
     main()
 
 
-# Bach to run this file in parallel
+# Shell to run this file in parallel
 
 #set -x
 #for num in $(seq -w 01 24); do
