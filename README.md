@@ -43,6 +43,9 @@ In pre-processing folder shell scripts for splitting detailed longitudinal and e
 
 
 ### 2_dict_codes
+
+Here a code dictionary is constructed from all the codes in combined longitudinal files. In addition a total number of code occurrences is counted as well as a number of IDs which have a code occurring at least once in their longitudinal history. 
+
 ### 3_delete_rare_redundant_codes
 
 Additionally omitted endpoints/ other codes: 
