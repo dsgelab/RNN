@@ -93,4 +93,4 @@ Here we also removed individuals: 1) not alive by 31st December 2017 2) missing 
 
 Emigrated individuals were determined based on two registers: DVV relatives and DVV living history. DVV relatives records relatives’ emigration date. In living history if a last recorded residence type is foreign and no end date of that residence is recorded those individuals were also considered emigrated.  174175 emigrations were from DVV relatives and additional 1344 from DVV living history. A script for emigrated individuals is: emigration.py
 
-[alt text](dummy DF.png "Logo Title Text 1")
+![alt text](dummy_DF.png "Example of final dataframe")
