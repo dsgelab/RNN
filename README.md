@@ -71,6 +71,16 @@ In this part we have also removed all rare codes (for each data modality). Codes
 
 These codes were deleted form data files and code dictionary. 
 
+The script 3_delete_rare_redundant_parallel can be run in parallel using shell commands:
+
+```console
+set -x
+for num in $(seq -w 01 24); do
+	INDEX=$(echo $num | sed 's/^0*//')
+	python3 /data/projects/project_avabalas/RNN/preprocessing_new/3_delete_rare_redundant_parallel.py --loop_index $INDEX &
+done
+```
+
 
 ### 4_demo_features
 
