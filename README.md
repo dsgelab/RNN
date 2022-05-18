@@ -71,7 +71,7 @@ In this part we have also removed all rare codes (for each data modality). Codes
 
 These codes were deleted form data files and code dictionary. 
 
-The script 3_delete_rare_redundant_parallel can be run in parallel using shell commands:
+The script 3_delete_rare_redundant_parallel.py can be run in parallel using shell commands:
 
 ```console
 set -x
