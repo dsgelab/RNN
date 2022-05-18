@@ -2,6 +2,8 @@
 
 ## Preprocessing
 
+The code which was written with Jupyter notebook in the virtual machine, here is shared both as executable .py files and more readable .md files 
+
 ### 0_additional_longitudinal_features
 
 Here longitudinal features are processed from newly received registers (which are not included in “detailed longitudinal” file).
