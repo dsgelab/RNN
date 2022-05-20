@@ -92,7 +92,7 @@ This script is for extracting fixed-over-the-time features, which cannot be incl
 
 A label was assigned a value of 1 if an individual died within a period of 2018-2019 (a case), if an induvial died earlier the assigned value was 2 (neither case nor control), and the rest were assigned a value of 0 (control).
 
-The Finregstry project has information about individuals’ deaths from two registers: SF death and DVV relatives. For our purposes, we considered individuals as deceased if either the year of death was recorded in the SF death register (the year was used because for a small proportion of entries only year but no exact date was available) or the date of death was recorded in DVV relatives register. Both registers do not fully overlap with larger disagreement in earlier years and considerably smaller in later years. For the period between 1st January 2018 and 31st December 2019 there was a good agreement between the two registers (99.83%).
+The Finregstry project has information about individuals’ deaths from two registers: SF death and DVV relatives. For our purposes, we considered individuals as deceased if either the year of death was recorded in the SF death register (the year was used because for a small proportion of entries only year but no exact date was available) or the date of death was recorded in DVV relatives register. Both registers do not fully overlap with larger disagreement in the earlier years and considerably smaller in the later years. For the period between 1st January 2018 and 31st December 2019 there was a good agreement between the two registers (99.83%).
 In a full sample the label distribution was: 
 * 0 - 5573999
 * 2 - 1483115
@@ -101,13 +101,13 @@ In a full sample the label distribution was:
 
 ### 6_final_sets
 
-This code combines longitudinal data spanning multiple rows for each individual into a data-frame with all longitudinal data for one individual contained in a single row (as in this image).
+This code combines longitudinal data spanning multiple rows for each individual into a data-frame with all longitudinal data for a single individual contained in one row (as in this image).
 
 ![alt text](dummy_DF.png "Example of final dataframe")
 
 All medical codes occurring within each single life year of an individual are ";" joined, then all years are " " joined producing a single string containing all longitudinal medical code data for that individual. This string can easily then be split when a batch is constructed for model training.
 
-Here we also removed individuals: 1) not alive by 31st December 2017 2) missing sex info 3) emigrated 4) no longitudinal data
+Here we also removed individuals: 1) not alive by 31st December 2017 2) missing sex info 3) emigrated 4) no longitudinal codes recorded
 
 Emigrated individuals were determined based on two registers: DVV relatives and DVV living history. DVV relatives records relatives’ emigration date. In living history if a last recorded residence type is foreign and no end date of that residence is recorded those individuals were also considered emigrated.  174175 emigrations were from DVV relatives and additional 1344 from DVV living history. A script for emigrated individuals is: emigration.py
 
