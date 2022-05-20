@@ -6,7 +6,7 @@ The code which was written with Jupyter notebook in the virtual machine, here is
 
 ### 0_additional_longitudinal_features
 
-Here longitudinal features are processed from newly received registers (which were previously not included in “detailed longitudinal” file (a file combining data from multiple registers (Hilmo, Avohilmo, Kela purchases, Kela reimburesements, cancer, causes of death))).
+Here longitudinal features are processed from newly received registers (which were previously not included in “detailed longitudinal” file which combinines data from multiple registers (Hilmo, Avohilmo, Kela purchases, Kela reimburesements, cancer, causes of death)).
 
 
 1. Infectious diseases
