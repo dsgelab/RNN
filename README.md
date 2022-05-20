@@ -24,7 +24,7 @@ Mothers' IDs for children born after 2010 was taken from DVV relatives register.
 
 ### 1_combine_datas
 
-This script combines data from three sources: Endpoint longitudinal file, Detailed longitudinal file and new longitudinal features file (which is derived from new registers not previously included in detailed longitudinal file yet (see 0_additional_longitudinal_features)). Before running this script, all longitudinal files must be split to smaller files each containing data for 300k IDs. The script can be run in parallel using shell commands:
+This script combines data from three sources: endpoint longitudinal file, detailed longitudinal file, and new longitudinal features file (which is derived from new registers not previously included in detailed longitudinal file (see 0_additional_longitudinal_features)). Before running this script, all longitudinal files were split to smaller files each containing data for 300k IDs. The script can be run in parallel using shell commands:
 
 ```console
 set -x
@@ -54,12 +54,12 @@ Here a code dictionary is constructed from all the codes in combined longitudina
 
 Additionally omitted endpoints/ other codes: 
 
-Endpoint longitudinal from which endpoint codes were taken had endpoints marked as omitted in FinnGen endpoint definition file “OMIT” column already removed except those which had 'Modification_reason' marked as due to 'EXMORE/EXALLC priorities' and a 'DEATH' endpoint.
+Endpoint longitudinal file from which endpoint codes were taken had endpoints marked as omitted in FinnGen endpoint definition file “OMIT” column already removed, except those which had 'Modification_reason' marked as due to 'EXMORE/EXALLC priorities' and a 'DEATH' endpoint.
 
 ```python
 omits = endp[((endp['OMIT']==2) | (endp['OMIT']==1)) & (endp['Modification_reason']!='EXMORE/EXALLC priorities') & (endp['NAME']!='DEATH')]['NAME'].unique()
 ```
-Here in addition we have removed endpoints which were generated solely form Kela purchases register medication ATC codes, because ATC codes from Kela purchases register are included as separate longitudinal features
+Here, in addition, we have removed endpoints which were generated solely form Kela purchases register medication ATC codes, because ATC codes from Kela purchases register are included as separate longitudinal features
 
 ```python
 meds = endp[(endp['KELA_ATC'].notna()) & (endp['HD_ICD_10'].isna())]['NAME'].unique()
@@ -69,7 +69,7 @@ We have also removed composite endpoints which are combinations of other endpoin
 ```python
 composite = endp[(endp['COD_ICD_10'].isna()) & (endp['HD_ICD_10'].isna()) & (endp['HD_ICD_10'].isna()) & (endp['CANC_TOPO'].isna()) & (endp['KELA_ATC'].isna()) & (endp['KELA_REIMB'].isna()) & (endp['OPER_NOM'].isna()) & ~(endp['NAME'].str.contains('#_This_follow'))]['NAME'].unique()
 ```
-In this part we have also removed all rare codes (for each data modality). Codes occurring in less than 70 individuals in a full dataset (prevalence of < 1/100000) were removed.
+In this part we have also removed all rare codes (for each data modality - codes occurring in less than 70 individuals in a full dataset (prevalence of < 1/100000).
 
 These codes were deleted form data files and code dictionary. 
 
@@ -86,7 +86,7 @@ done
 
 ### 4_demo_features
 
-This script is for extracting fixed-over-the-time features, which cannot be included in the model longitudinally. The data inputs are from pre-processed “minimal phenotype” file and from Birth, Malformations, Social assistance, Social Hilmo and Intensive care register. Smoking status was also derived from AvoHilmo and Birth registers. The features were, continuous, ordinal, and categorical (binary + one-hot-encoded if there were more than 2 categories). Continuous and ordinal features were rescaled to be in the range from 0 to 1. 
+This script is for extracting fixed-over-the-time features, which cannot be included in the model longitudinally. The data inputs are from pre-processed “minimal phenotype” file and from Birth, Malformations, Social assistance, Social Hilmo and Intensive care registers. Smoking status was also derived from AvoHilmo and Birth registers. The features were, continuous, ordinal, and categorical (binary + one-hot-encoded if there were more than 2 categories). Continuous and ordinal features were rescaled to be in the range from 0 to 1. 
 
 ### 5_label
 
