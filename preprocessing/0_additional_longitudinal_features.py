@@ -139,6 +139,36 @@ inf_d = inf_d[['FINREGISTRYID', 'SOURCE', 'EVENT_AGE', 'PVM','CODE']]
 print('%_IDs',(inf_d['FINREGISTRYID'].nunique()/7166416)*100,'N codes per ID', inf_d.shape[0]/7166416,'unique codes after processing',inf_d['CODE'].nunique() )
 
 
+# In[ ]:
+
+
+#replace Infectiois disease codes (which a lists of comma separated strings trasformed to a single string (such codes will cause issues down the line e.g. vhen using .split(",") )) with codes in format: IN_DIS_X
+types={} 
+for code in inf_d['CODE'].values.tolist():
+    if code in types: continue
+    else: types[code] = "IN_DIS_"+str(len(types)+1)
+
+
+# In[ ]:
+
+
+# replace codes
+code_list = inf_d['CODE'].values.tolist()
+new_code_list = []
+for code in code_list:
+    if code in types: new_code_list.append(types[code])
+    else: print(code, 'CODE NOT IN THE LIST!!!!')
+inf_d['CODE'] = new_code_list
+
+
+# In[ ]:
+
+
+types_df = pd.DataFrame([(k, v) for k, v in types.items()], columns=['Code','Token'])
+print(types_df.shape[0])
+types_df.to_csv('/data/projects/project_avabalas/RNN/preprocessing_new/Invectious_disease_code_dict.csv',index=False)
+
+
 # # SES
 
 # In[ ]:
@@ -337,6 +367,12 @@ ses = ses[['FINREGISTRYID', 'SOURCE', 'EVENT_AGE', 'PVM','CODE']]
 # In[ ]:
 
 
+ses['CODE'] = ses['CODE'].apply(lambda x: "SES_"+str(x))
+
+
+# In[ ]:
+
+
 print('%_IDs',(ses['FINREGISTRYID'].nunique()/7166416)*100,'N codes per ID', ses.shape[0]/7166416,'unique codes after processing',ses['CODE'].nunique() )
 
 
@@ -401,6 +437,12 @@ amati = amati.sort_values(["FINREGISTRYID", "EVENT_AGE"], ascending = (True, Tru
 
 
 amati = amati.loc[(amati['PVM'] >= '1995-01-01')].copy() # because coddig appears to be different before 1995
+
+
+# In[ ]:
+
+
+amati['CODE'] = amati['CODE'].apply(lambda x: "O_A_"+str(x))
 
 
 # In[ ]:
@@ -474,6 +516,12 @@ edu_l = edu_l[['FINREGISTRYID', 'SOURCE', 'EVENT_AGE', 'PVM','CODE']]
 # In[ ]:
 
 
+edu_l['CODE'] = edu_l['CODE'].apply(lambda x: "E_L_"+str(int(x)))
+
+
+# In[ ]:
+
+
 print('%_IDs',(edu_l['FINREGISTRYID'].nunique()/7166416)*100,'N codes per ID', edu_l.shape[0]/7166416,'unique codes after processing',edu_l['CODE'].nunique() )
 
 
@@ -484,7 +532,7 @@ print('%_IDs',(edu_l['FINREGISTRYID'].nunique()/7166416)*100,'N codes per ID', e
 
 edu_f = education.copy()
 edu_f = edu_f.rename(columns={'vuosi': 'PVM', 'iscfi2013': 'CODE'})
-edu_f['SOURCE']="E_f"
+edu_f['SOURCE']="E_F"
 edu_f = edu_f[['FINREGISTRYID', 'SOURCE', 'EVENT_AGE', 'PVM','CODE']]
 
 
@@ -497,14 +545,16 @@ print('%_IDs',(edu_f['FINREGISTRYID'].nunique()/7166416)*100,'N codes per ID', e
 # In[ ]:
 
 
-longitudinal = pd.concat([inf_d, ses,amati,edu_l,edu_f],    # Combine vertically
-                          ignore_index = True,
-                          sort = False)
+edu_f['CODE'] = edu_f['CODE'].apply(lambda x: "E_F_"+str(int(x)))
 
 
 # In[ ]:
 
 
+# combine and save all longitudinal except GEO
+longitudinal = pd.concat([inf_d, ses,amati,edu_l,edu_f],    # Combine vertically
+                          ignore_index = True,
+                          sort = False)
 print(inf_d.shape[0]+ses.shape[0]+amati.shape[0]+edu_l.shape[0]+edu_f.shape[0]==longitudinal.shape[0])
 
 
@@ -743,8 +793,16 @@ print(geo2['FINREGISTRYID'].nunique())
 # In[ ]:
 
 
+geo2['CODE'] = geo2['CODE'].apply(lambda x: "GEO_"+str(int(x)))
+
+
+# In[ ]:
+
+
 geo2.to_csv('/data/projects/project_avabalas/RNN/preprocessing_new/geo_features.csv', index=False)
 
+
+# # Combine datas
 
 # In[ ]:
 
@@ -770,6 +828,17 @@ all_long = all_long.sort_values(["FINREGISTRYID", "EVENT_AGE"], ascending = (Tru
 
 
 all_long.to_csv('/data/projects/project_avabalas/RNN/preprocessing_new/all_long_features.csv', index=False)
+
+
+# In[ ]:
+
+
+#all_long = pd.read_csv('/data/projects/project_avabalas/RNN/preprocessing_new/all_long_features.csv')
+
+
+# In[ ]:
+
+
 all_long.reset_index(drop=True, inplace=True)
 
 

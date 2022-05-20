@@ -653,3 +653,13 @@ features[['number_of_children', 'drug_purchases', 'kanta_prescriptions','B_prrev
 ```python
 features.to_csv('/data/projects/project_avabalas/RNN/preprocessing_new/demographic_features.csv', index=False)
 ```
+
+
+```python
+# " ".join demograophic features to reduce computational reecoourse requirements down the line
+demo = pd.read_csv('/data/projects/project_avabalas/RNN/preprocessing_new/demographic_features.csv', dtype=str)
+demo = demo[demo['sex'].notna()]
+demo = pd.concat([demo[['FINREGISTRYID']], demo[demo.iloc[:,1:].columns.tolist()].T.agg(' '.join)], axis = 1)
+demo = demo.rename(columns={'0': 'demo'})
+demo.to_csv('/data/projects/project_avabalas/RNN/preprocessing_new/demographic_features2.csv', index=False)
+```

@@ -103,6 +103,6 @@ if __name__ == "__main__":
 #set -x
 #for num in $(seq -w 01 24); do
 #	INDEX=$(echo $num | sed 's/^0*//')
-#	python3 /data/project_avabalas/RNN/preprocessing_new/1_combine_datas.py --loop_index $INDEX &
+#	python3 /data/projects/project_avabalas/RNN/preprocessing_new/1_combine_datas.py --loop_index $INDEX &
 #	if (( $INDEX % 5 == 0 )); then sleep 110m; fi
 #done
