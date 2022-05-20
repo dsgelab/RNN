@@ -124,7 +124,7 @@ for num in $(seq -w 01 24); do
 done
 ```
 
-(a single process uses up to 25G of memory)
+(a single process uses up to 30G of memory)
 
 After running the script combine all output files into a single file: 
 
