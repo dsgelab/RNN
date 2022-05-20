@@ -8,7 +8,7 @@ The code which was written with Jupyter notebook in the virtual machine, here is
 
 Here longitudinal features are processed from newly received registers (which were previously not included in “detailed longitudinal” file, which combinines data from multiple registers (Hilmo, Avohilmo, Kela purchases, Kela reimburesements, cancer, causes of death)).
 
-The new register sused for longitudinal features are:
+The new registers used for longitudinal features are:
 
 
 1. Infectious diseases
