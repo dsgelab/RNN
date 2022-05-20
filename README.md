@@ -8,6 +8,8 @@ The code which was written with Jupyter notebook in the virtual machine, here is
 
 Here longitudinal features are processed from newly received registers (which were previously not included in “detailed longitudinal” file, which combinines data from multiple registers (Hilmo, Avohilmo, Kela purchases, Kela reimburesements, cancer, causes of death)).
 
+The new register sused for longitudinal features are:
+
 
 1. Infectious diseases
 register is based on disease notifications from medical doctors and laboratories. In our study we have used information about microbes which caused an infectious disease. A period covered was from 1994 until the predictive interval. In total there were 170 unique codes.   
