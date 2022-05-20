@@ -129,5 +129,5 @@ done
 After running the script combine all output files into a single file: 
 
 ```console
-awk 'FNR>1 || NR==1' grouped_DF_all_codes_100codes.all3.* > grouped_DF_all_codes_100codes.all3.csv
+awk 'FNR>1 || NR==1' grouped_DF_all_codes_100codes.csv.* > grouped_DF_all_codes_100codes.all.csv
 ```
