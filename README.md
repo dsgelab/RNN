@@ -6,7 +6,9 @@ The code which was written with Jupyter notebook in the virtual machine, here is
 
 ### 0_additional_longitudinal_features
 
-Here longitudinal features are processed from newly received registers (which are not included in “detailed longitudinal” file).
+Here longitudinal features are processed from newly received registers (which were previously not included in “detailed longitudinal” file (a file combining data from multiple registers (Hilmo, Avohilmo, Kela purchases, Kela reimburesements, cancer, causes of death))).
+
+
 1. Infectious diseases
 register is based on disease notifications from medical doctors and laboratories. In our study we have used information about microbes which caused an infectious disease. A period covered was from 1994 until the predictive interval. In total there were 170 unique codes.   
 2. Socioeconomic status
