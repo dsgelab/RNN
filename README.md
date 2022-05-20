@@ -35,6 +35,8 @@ for num in $(seq -w 01 24); do
 done
 ```
 
+(a single process uses up to 33G of memory)
+
 Locations for already split files: 
 detiled longitudinal: '/data/processed_data/endpointer/supporting_files/main/',
 endpoint longitudinal: '/data/project_avabalas/RNN/preprocessing/',
@@ -97,10 +99,33 @@ In a full sample the label distribution was:
 * 1 - 109302
 
 
-### 6_final_data
+### 6_final_sets
+
+This code combines longitudinal data spanning multiple rows for each individual into a data-frame with all longitudinal data for one individual contained in a single row (as in this image).
+
+![alt text](dummy_DF.png "Example of final dataframe")
 
 Here we also removed individuals: 1) not alive by 31st December 2017 2) missing sex info 3) emigrated 4) no longitudinal data
 
 Emigrated individuals were determined based on two registers: DVV relatives and DVV living history. DVV relatives records relatives’ emigration date. In living history if a last recorded residence type is foreign and no end date of that residence is recorded those individuals were also considered emigrated.  174175 emigrations were from DVV relatives and additional 1344 from DVV living history. A script for emigrated individuals is: emigration.py
 
-![alt text](dummy_DF.png "Example of final dataframe")
+The medical codes were also tokenized using a code dictionary created in "3_delete_rare_redundant_codes"
+
+To run the script in parallel run these Shell commands: 
+
+```console
+set -x
+for num in $(seq -w 01 24); do
+	INDEX=$(echo $num | sed 's/^0*//')
+	python3 /data/projects/project_avabalas/RNN/preprocessing_new/6_final_sets.py --loop_index $INDEX &
+	if (( $INDEX % 3 == 0 )); then sleep 70m; fi
+done
+```
+
+(a single process uses up to 25G of memory)
+
+After running the script combine all output files into a single file: 
+
+```console
+awk 'FNR>1 || NR==1' grouped_DF_all_codes_100codes.all3.* > grouped_DF_all_codes_100codes.all3.csv
+```
