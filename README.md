@@ -103,7 +103,7 @@ In a full sample the label distribution was:
 
 This code combines longitudinal data spanning multiple rows for each individual into a data-frame with all longitudinal data for one individual contained in a single row (as in this image).
 
-All the medical codes occuring within each single life year of an individual are ";" joine, then all years are " " joined into a single string.  
+All medical codes occurring within each single life year of an individual are ";" joined, then all years are " " joined producing a single string containing all longitudinal medical code data for that individual. This string can easily then be split when a batch is constructed for model training.
 
 ![alt text](dummy_DF.png "Example of final dataframe")
 
