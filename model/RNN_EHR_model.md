@@ -1224,9 +1224,6 @@ for nm in [i for i in [1000000] for _ in range(1)]: # Run code using subsample o
 
 
 
-![png](output_13_1.png)
-
-
     [[169512  26460]
      [   432   3596]]
     [33m
