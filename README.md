@@ -1,4 +1,4 @@
-# RNN (pytorch) model and preprocessing of Finregistry data
+# Predictive RNN models on Finregistry data using Pytorch
 
 ## Preprocessing
 
